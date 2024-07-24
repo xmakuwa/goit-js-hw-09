@@ -1,31 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
 .feedback-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 480px;
-    padding: 12px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-  }
-  
-  .feedback-form label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-  
-  .feedback-form button {
-    padding: 8px 12px;
-    font: inherit;
-    cursor: pointer;
-  }
-  
-  input,
-  textarea {
-    padding: 8px;
-    font: inherit;
-  }
-  
-  textarea {
-    resize: none;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  max-width: 408px;
+  background-color: #fff;
+  border: 1px solid #808080;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.feedback-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 360px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  font: inherit;
+}
+
+.feedback-form input {
+  height: 40px;
+}
+
+.feedback-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border: 1px solid #000;
+  color: #2e2f42;
+}
+
+.feedback-form button {
+  width: 95px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font: inherit;
+  background: #4e75ff;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+}
+
+.bth:hover {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 95px;
+  height: 40px;
+  background: #6c8cff;
+}
