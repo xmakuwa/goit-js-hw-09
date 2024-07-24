@@ -1,51 +1,36 @@
-import _ from 'lodash'
-  const dataReset = {
-    email: "",
-    message: "",
-};
+const form = document.querySelector(`form.feedback-form`);
+form.addEventListener('submit', submitDone);
 
-const keyData = "feedback-form-state";
-const save = (key, value) => {
-  try {
-    const serializedState = JSON.stringify(value);
-    localStorage.setItem(key, serializedState);
-  } catch (error) {
-    console.error("Set state error: ", error.message);
-  }
-};
+const email = document.querySelector(`form.feedback-form > label > input`);
+const message = document.querySelector(`form.feedback-form > label > textarea`);
+const localStorageKey = 'feedback-form-state';
 
-const load = (key) => {
-  try {
-    const serializedState = localStorage.getItem(key);
-    return serializedState === null ? dataReset : JSON.parse(serializedState);
-  } catch (error) {
-    console.error("Get state error: ", error.message);
-  }
-};
-
-const remove = (key) => {
-  try {
-    localStorage.removeItem(key);
-  } catch (error) {
-    console.error("Remove state error: ", error.message);
-  }
-};
-
-const form = document.querySelector(".feedback-form");
-const dataForm = load(keyData);
-
-form.elements.email.value = dataForm.email ?? "";
-form.elements.message.value = dataForm.message ?? "";
-
-form.addEventListener("input", _.throttle((evt) => {
-  dataForm.email = form.elements.email.value;
-  dataForm.message = form.elements.message.value;
-  save(keyData, dataForm);
-}, 500));
-
-form.addEventListener("submit", (evt) => {
-    console.log(dataForm);
-    evt.preventDefault();
-    remove(keyData);
-    form.reset();
+form.addEventListener('input', event => {
+  const { name, value } = event.target;
+  const currentData = JSON.parse(localStorage.getItem(localStorageKey)) ?? {};
+  currentData[name] = value.trim();
+  localStorage.setItem(localStorageKey, JSON.stringify(currentData));
 });
+
+function submitDone(event) {
+  event.preventDefault();
+  if (
+    event.target.elements.email.value.trim() === '' ||
+    event.target.elements.message.value.trim() === ''
+  ) {
+    return alert('All form fields must be filled in');
+  }
+  console.log('Submit done!');
+  console.log({
+    email: event.target.elements.email.value.trim(),
+    message: event.target.elements.message.value.trim(),
+  });
+  form.reset();
+  localStorage.removeItem(localStorageKey);
+  alert(`Good job!\nSubmit done!`);
+}
+
+const saveFormData = JSON.parse(localStorage.getItem(localStorageKey)) ?? {};
+
+email.value = saveFormData.email ?? ``;
+message.value = saveFormData.message ?? ``;
